@@ -9,9 +9,6 @@ public class Fifo {
 		int maxPageIndex = data[0];
 		int totalFrames = data[1];
 		int totalRequests = data[2];
-		System.out.println("max page index is " + maxPageIndex);
-		System.out.println("total frames is " + totalFrames);
-		System.out.println("total requests is " + totalRequests);
 		int num = 0;
 		boolean flag = true;
 		
@@ -33,6 +30,7 @@ public class Fifo {
 			int page = pages[i];
 			for(int j=0; j<totalFrames; j++) {
 				if(frames[j] == page) {
+					System.out.println("Page " + page + " already loaded into Frame " + j);
 					flag = false;
 					break;
 				}
@@ -43,6 +41,7 @@ public class Fifo {
 			
 			if(flag) {
 				frames[num] = page;
+				System.out.println("Page " + page + " loaded into Frame " + num);
 				faults++;
 				num++;
 			}
@@ -52,6 +51,7 @@ public class Fifo {
 				System.out.print(frames[k]+ " ");
 			System.out.println();
 		}
+		System.out.println();
 		System.out.println("faults = " + faults);
 	}
 	

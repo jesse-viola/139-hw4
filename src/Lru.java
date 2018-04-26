@@ -22,6 +22,7 @@ public class Lru {
 		int duplicateIndex = 0;
 		int count = 0;
 		int frameIndex = 0;
+		int faults = 0;
 		
 		int[] pages = new int[totalRequests];
 		int[] frames = new int[totalFrames];
@@ -70,22 +71,25 @@ public class Lru {
 					count++;
 					recent[frameIndex] = count;
 					frames[frameIndex] = page;
-					System.out.println("Page " + page + " is being loaded into Frame" + frameIndex);
-
+					System.out.println("Page " + page + " is being loaded into Frame " + frameIndex);
 					frameIndex++;
+					faults++;
 				}
 				
 				else if(frameIndex >= totalFrames)
 				{
 					//find the smallest value in the recent array, find that index and then replace the frames array with that grabbed index with the new page
+					count++;
 					int index_to_replace = index_of_minimum_value(recent);
-					System.out.println("Page " + frames[index_to_replace] + " is being unloaded, Page " + page + " is being loaded in Frame " + index_to_replace);
+					recent[index_to_replace] = count;
+					System.out.println("Page " + frames[index_to_replace] + " is being unloaded from Frame " + index_to_replace +  " Page " + page + " is being loaded in Frame " + index_to_replace);
 					frames[index_to_replace] = page;
+					faults++;
 				}
 			}
-			duplicate = false;	
+			duplicate = false;
 		}
-		
+		System.out.println("Page faults = " + faults);
 	}
 
 	

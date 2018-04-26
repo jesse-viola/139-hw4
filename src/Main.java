@@ -3,9 +3,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		//instantiate the classes
 		Fifo fifo = new Fifo();
+		Lru lru = new Lru();
 		//command line file read in
 		String filename = args[0];
 		int[] data = readFiles(filename);
@@ -13,15 +14,20 @@ public class Main {
 		//choose what algo to run
 		if(args[1].equals("FIFO")) {
 			System.out.println("User started FIFO");
+			System.out.println();
 			//pass data to FIFO class
 			fifo.setData(data);
 			fifo.runFifo();
 		}
 		else if(args[1].equals("LRU")) {
 			System.out.println("User started LRU");
+			System.out.println();
+			lru.setData(data);
+			lru.runLru();
 		}
 		else if(args[1].equals("OPT")) {
 			System.out.println("User started OPT");
+			System.out.println();
 		}
 	}
 	

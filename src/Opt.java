@@ -16,6 +16,7 @@ public class Opt {
 		int frameIndex = 0;
 		int optimalTracker = 0;
 		boolean duplicate = false;
+		boolean exists = false;
 		
 		int[] pages = new int[totalRequests];
 		int[] frames = new int[totalFrames];
@@ -67,18 +68,24 @@ public class Opt {
 					{
 						//make another index 
 						int temp = -1;
-						boolean exists = false;
 				
 						for(int k = i; k<totalRequests; k++)
 						{
 							//search through entire request array
-								if(buffer[j] == pages[k])
+								if(frames[j] == pages[k])
 								{
 									temp = k;
 									//find if the number exists in the request array still and record the greatest number
 									buffer[j] = temp;
+									exists = true;
+								}
+								if(k == totalRequests-1 && (exists == false))
+								{
+									buffer[j] = 100;
+									break;
 								}
 						}
+						exists = false;
 					}
 					
 					//now we need to add to frames and update our buffer array, to figure out which index we need to remove we look through buffer array and
@@ -86,7 +93,7 @@ public class Opt {
 					int index_to_replace = getIndexOfLargest(buffer);
 					System.out.println("Page " + frames[index_to_replace] + " is being unloaded from Frame " + index_to_replace +  " Page " + page + " is being loaded in Frame " + index_to_replace);
 					frames[index_to_replace] = page;
-					buffer[index_to_replace] = i;
+					buffer[index_to_replace] = -1;
 					faults++;
 				}
 			}

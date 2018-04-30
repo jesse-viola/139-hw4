@@ -7,6 +7,7 @@ public class Main {
 		//instantiate the classes
 		Fifo fifo = new Fifo();
 		Lru lru = new Lru();
+		Opt opt = new Opt();
 		//command line file read in
 		String filename = args[0];
 		int[] data = readFiles(filename);
@@ -28,6 +29,8 @@ public class Main {
 		else if(args[1].equals("OPT")) {
 			System.out.println("User started OPT");
 			System.out.println();
+			opt.setData(data);
+			opt.runOpt();
 		}
 	}
 	

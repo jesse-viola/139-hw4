@@ -10,6 +10,8 @@ public class Fifo {
 		int totalFrames = data[1];
 		int totalRequests = data[2];
 		int num = 0;
+		int counter = 0;
+		boolean isFull = false;
 		boolean flag = true;
 		
 		int[] pages = new int[totalRequests];
@@ -40,16 +42,22 @@ public class Fifo {
 				num = 0;
 			
 			if(flag) {
+				int currentPage = frames[num]; 
 				frames[num] = page;
-				System.out.println("Page " + page + " loaded into Frame " + num);
+				if(counter >= totalFrames)
+				{
+					System.out.println("Page " + currentPage + " unloaded from Frame " + num + ", Page " + page + " loaded into Frame " + num);
+				}
+				if(counter < totalFrames)
+				{
+					System.out.println("Page " + page + " loaded into Frame " + num);
+					counter++;
+				}
+
 				faults++;
 				num++;
 			}
 			
-			System.out.print("frame : ");
-			for(int k=0; k<totalFrames; k++)
-				System.out.print(frames[k]+ " ");
-			System.out.println();
 		}
 		System.out.println();
 		System.out.println("faults = " + faults);

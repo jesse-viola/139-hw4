@@ -78,10 +78,11 @@ public class Opt {
 									//find if the number exists in the request array still and record the greatest number
 									buffer[j] = temp;
 									exists = true;
+									break;
 								}
 								if(k == totalRequests-1 && (exists == false))
 								{
-									buffer[j] = 100;
+									buffer[j] = 1000;
 									break;
 								}
 						}
@@ -99,7 +100,8 @@ public class Opt {
 			}
 			duplicate = false;
 		}
-		
+		System.out.println();
+		System.out.println("faults = " + faults);
 	}
 	
 	public int[] removeIndex( int [] arr, int remIndex )

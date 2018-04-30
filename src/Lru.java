@@ -89,7 +89,8 @@ public class Lru {
 			}
 			duplicate = false;
 		}
-		System.out.println("Page faults = " + faults);
+		System.out.println();
+		System.out.println("faults = " + faults);
 	}
 
 	
